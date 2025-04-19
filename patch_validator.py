@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
+import argparse
 
-def calculate_expected_patch(level, is_plus, detail_ratio):
+def calculate_expected_patch(level, is_plus, detail_ratio, threshold=0.8499, divisor=13.0039):
     """
     PATCH 계산 공식 구현
     level: 레벨
     is_plus: 플러스 여부 (0 또는 1)
     detail_ratio: 세부비율 퍼센트값 (소수점으로 표현)
+    threshold: 세부비율 조정을 위한 기준값 (기본값: 0.8499)
+    divisor: 세부비율 조정을 위한 나누는 값 (기본값: 13.0039)
     """
     # 플러스 여부에 따른 승수 결정
     plus_multiplier = 1.02 if is_plus else 1.0
@@ -14,7 +17,7 @@ def calculate_expected_patch(level, is_plus, detail_ratio):
     base_value = level * 4.2 * plus_multiplier
     
     # 세부비율 조정
-    ratio_adjustment = (detail_ratio - 0.8499) / 13.0053
+    ratio_adjustment = (detail_ratio - threshold) / divisor
     
     # 0~1 사이로 제한
     if ratio_adjustment < 0:
@@ -24,8 +27,8 @@ def calculate_expected_patch(level, is_plus, detail_ratio):
         
     return base_value * ratio_adjustment * 100
 
-def find_mislabeled_data():
-    # 실제 데이터
+def find_mislabeled_data(threshold=0.8499, divisor=13.0053, tolerance=0.01):
+    # 실제 데이터 - (레벨, PLUS 여부, 세부비율, 실제 PATCH)
     real_data = [
         (19, 0, 895/917, 77.38),
         (22, 0, 1003/1032, 86.68),
@@ -159,16 +162,13 @@ def find_mislabeled_data():
         (28, 1, 1170/1226, 96.32)
     ]
     
-    # 오차 허용 범위 설정 (실제값과 계산값의 차이가 크면 의심)
-    tolerance = 0.01
-    
     # 의심되는 데이터 저장할 리스트
     suspicious_data = []
     
     # 각 데이터에 대해 검증
     for i, (level, is_plus, detail_ratio, actual_patch) in enumerate(real_data):
         # 예상되는 PATCH 값 계산
-        expected_patch = calculate_expected_patch(level, is_plus, detail_ratio)
+        expected_patch = calculate_expected_patch(level, is_plus, detail_ratio, threshold, divisor)
         
         # 실제값과 예상값 차이 계산
         difference = abs(actual_patch - expected_patch)
@@ -188,8 +188,16 @@ def find_mislabeled_data():
     return suspicious_data
 
 def main():
-    suspicious_data = find_mislabeled_data()
+    # 명령행 인자 파싱
+    parser = argparse.ArgumentParser(description='데이터 라벨링 검증 도구')
+    parser.add_argument('--threshold', type=float, default=0.8499, help='세부비율 조정을 위한 기준값 (기본값: 0.8499)')
+    parser.add_argument('--divisor', type=float, default=13.0053, help='세부비율 조정을 위한 나누는 값 (기본값: 13.0053)')
+    parser.add_argument('--tolerance', type=float, default=0.01, help='허용 오차 범위 (기본값: 0.01)')
+    args = parser.parse_args()
     
+    suspicious_data = find_mislabeled_data(args.threshold, args.divisor, args.tolerance)
+    
+    print(f"사용된 threshold: {args.threshold}, divisor: {args.divisor}, tolerance: {args.tolerance}")
     print(f"의심되는 데이터 {len(suspicious_data)}개 발견:")
     print("-" * 80)
     print(f"{'INDEX':^8} | {'LEVEL':^6} | {'DIFF':^6} | {'DETAIL_RATIO':^12} | {'ACTUAL_PATCH':^14} | {'EXPECTED_PATCH':^14} | {'DIFFERENCE':^12}")
