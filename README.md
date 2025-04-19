@@ -1,6 +1,6 @@
 # platina-lab-patch-validator
 
-이 도구는 PLATiNA :: LAB 게임의 하단에 기재된 커뮤니티 레벨의 계산식을 기반으로 데이터 라벨링을 검증하는 프로그램입니다.
+이 도구는 PLATiNA :: LAB (플라티나 랩) 게임의 하단에 기재된 커뮤니티 레벨의 계산식을 기반으로 데이터 라벨링을 검증하는 프로그램입니다.
 
 ## 기능
 
@@ -62,7 +62,7 @@ ratio_adjustment = (세부비율 - threshold) / divisor
 
 ## 출처
 
-이 계산식은 다음 PLATiNA :: LAB 커뮤니티 정보(분석석) 글에서 참조되었습니다:
+이 계산식은 다음 PLATiNA :: LAB 커뮤니티 정보(분석) 글에서 참조되었습니다:
 
 - [디시인사이드 플라티나 랩 마이너 갤러리 - (념요청) 패치 계산식을 알아보자](https://gall.dcinside.com/mgallery/board/view/?id=platinalab&no=3833)
 - [디시인사이드 플라티나 랩 마이너 갤러리 - 패치 계산식을 알아보자 (2)](https://gall.dcinside.com/mgallery/board/view/?id=platinalab&no=3887)
