@@ -27,7 +27,7 @@ def calculate_expected_patch(level, is_plus, detail_ratio, threshold=0.8499, div
         
     return base_value * ratio_adjustment
 
-def find_mislabeled_data(threshold=0.8499, divisor=13.0053, tolerance=0.01):
+def find_mislabeled_data(threshold=0.8499, divisor=13.0039, tolerance=0.01):
     # 실제 데이터 - (레벨, PLUS 여부, 세부비율, 실제 PATCH)
     real_data = [
         (19, 0, 895/917, 77.38),
@@ -191,7 +191,7 @@ def main():
     # 명령행 인자 파싱
     parser = argparse.ArgumentParser(description='데이터 라벨링 검증 도구')
     parser.add_argument('--threshold', type=float, default=0.8499, help='세부비율 조정을 위한 기준값 (기본값: 0.8499)')
-    parser.add_argument('--divisor', type=float, default=13.0053, help='세부비율 조정을 위한 나누는 값 (기본값: 13.0053)')
+    parser.add_argument('--divisor', type=float, default=13.0039, help='세부비율 조정을 위한 나누는 값 (기본값: 13.0039)')
     parser.add_argument('--tolerance', type=float, default=0.01, help='허용 오차 범위 (기본값: 0.01)')
     args = parser.parse_args()
     
