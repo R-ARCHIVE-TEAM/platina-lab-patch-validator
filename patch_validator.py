@@ -17,7 +17,7 @@ def calculate_expected_patch(level, is_plus, detail_ratio, threshold=0.8499, div
     base_value = level * 4.2 * plus_multiplier
     
     # 세부비율 조정
-    ratio_adjustment = (detail_ratio - threshold) / divisor
+    ratio_adjustment = (detail_ratio - threshold) / divisor * 100
     
     # 0~1 사이로 제한
     if ratio_adjustment < 0:
@@ -25,7 +25,7 @@ def calculate_expected_patch(level, is_plus, detail_ratio, threshold=0.8499, div
     elif ratio_adjustment > 1:
         ratio_adjustment = 1
         
-    return base_value * ratio_adjustment * 100
+    return base_value * ratio_adjustment
 
 def find_mislabeled_data(threshold=0.8499, divisor=13.0053, tolerance=0.01):
     # 실제 데이터 - (레벨, PLUS 여부, 세부비율, 실제 PATCH)
