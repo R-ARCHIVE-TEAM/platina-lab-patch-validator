@@ -1,6 +1,6 @@
 # platina-lab-patch-validator
 
-이 도구는 PLATiNA :: LAB 게임의 하단에 기재된 커뮤니티 레벨의 계산식을 기반으로 데이터 라벨링을 검증하는 프로그램입니다.
+이 도구는 PLATiNA :: LAB (플라티나 랩) 게임의 하단에 기재된 커뮤니티 레벨의 계산식을 기반으로 데이터 라벨링을 검증하는 프로그램입니다.
 
 ## 기능
 
@@ -56,13 +56,13 @@ ratio_adjustment = (세부비율 - threshold) / divisor
 ### 파라미터 설명
 
 - `threshold`: 세부비율의 기준점 (기본값: 0.8499, 약 84.99%)
-- `divisor`: 세부비율 조정을 위한 나누는 값 (기본값: 13.0053)
+- `divisor`: 세부비율 조정을 위한 나누는 값 (기본값: 13.0039)
 
 이 공식은 세부비율이 약 85% 이상일 때부터 PATCH가 발생하기 시작하며, 세부비율이 약 98%(= 0.8499 + 13.0053)에 도달하면 최대 PATCH 값을 갖게 됩니다.
 
 ## 출처
 
-이 계산식은 다음 PLATiNA :: LAB 커뮤니티 정보(분석석) 글에서 참조되었습니다:
+이 계산식은 다음 PLATiNA :: LAB 커뮤니티 정보(분석) 글에서 참조되었습니다:
 
 - [디시인사이드 플라티나 랩 마이너 갤러리 - (념요청) 패치 계산식을 알아보자](https://gall.dcinside.com/mgallery/board/view/?id=platinalab&no=3833)
 - [디시인사이드 플라티나 랩 마이너 갤러리 - 패치 계산식을 알아보자 (2)](https://gall.dcinside.com/mgallery/board/view/?id=platinalab&no=3887)
